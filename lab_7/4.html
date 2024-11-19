@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Выберите цвет:</h2>
+    
+    <table>
+        <tr>
+            <td class="color red"></td>
+            <td class="color blue"></td>
+            <td class="color green"></td>
+        </tr>
+        <tr>
+            <td class="color yellow"></td>
+            <td class="color purple"></td>
+            <td class="color orange"></td>
+        </tr>
+    </table>
+
+    <style>
+
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .purple {
+            background-color: purple;
+        }
+
+        .orange {
+            background-color: orange;
+        }
+
+        .color {
+            width: 60px;
+            height: 60px;
+        }
+
+    </style>
+
+    <script>
+        "use strict";
+        
+        let colors = document.querySelectorAll('.color'); // все td с классом color
+        colors.forEach(color => {
+            color.addEventListener('click', function(e) {
+                let elemStyle = window.getComputedStyle(this); // значения всех CSS-свойств элемента
+                document.body.style.background = elemStyle.backgroundColor;
+            });
+        });
+
+    </script>
+</body>
+</html>

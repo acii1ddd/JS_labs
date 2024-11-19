@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let x = '1';
+        // if (x == 1) { // приведение типов
+        //     window.alert("Равно 1");
+        // } 
+        // else if (x === 1) {
+        //     window.alert("Не равно 1");
+        // }
+
+        "use strict";
+        document.title = "Загорцев Виктор";
+
+        try {
+            let lang = prompt("Введите значение языка: ");
+            switch(lang) {
+                case "ru": {
+                    document.body.innerHTML += "Русский";
+                    break;
+                }
+                case "en": {
+                    document.body.innerHTML += "Английский";
+                    break;
+                }
+                case "fr": {
+                    document.body.innerHTML += "Французский";
+                    break;
+                }
+                case "de": {
+                    document.body.innerHTML += "Немецкий";
+                    break;
+                }
+                default: {
+                    throw new Error("Язык неизвестен");
+                }
+            }
+        } catch (err) {
+            document.body.innerHTML += err.message;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = prompt("Введите строку: ");
+
+        let words = str.split(" ");
+        let longestWord = words.reduce((longestWord, currWord) => {
+            return currWord.length > longestWord.length ? currWord : longestWord;
+        });
+
+        document.body.innerHTML += `<p>Введенная строка: ${str}</p>`;
+        document.body.innerHTML += `<p>Самое длинное слово: ${longestWord}</p>`;
+
+    </script>
+</body>
+</html>

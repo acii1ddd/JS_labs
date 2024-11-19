@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="dateForm">
+        <lable for="startDate">Начальная дата:</lable>
+        <input type="date" id="startDate">
+
+        <label for="endDate">Конечная дата:</label>
+        <input type="date" id="endDate">
+
+        <button type="button" onclick="getCurrDynamics()">Получить данные</button>
+    </form>
+
+    <table id="currTable">
+        <thead>
+            <th>Дата</th>
+            <th>Курс к бел. рублю (1 к 1)</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        "use strict";
+        function getCurrData(startDate, endDate) {
+            return new Promise((resolve, reject) => {
+                const request = new XMLHttpRequest();
+                let url = `https://api.nbrb.by/exrates/rates/dynamics/471?startdate=${startDate}&enddate=${endDate}`;
+                request.open("GET", url)
+                
+                request.onreadystatechange = function() {
+                    if(request.readyState === 4) {
+                        if(request.status === 200) {
+                            const dynamics = JSON.parse(request.responseText); // parse в массив объект из json
+                            resolve(dynamics);
+                        }
+                        else {
+                            reject("Ошибка при получении данных о динамике курса валюты.")
+                        }
+                    }
+                };
+                request.send();
+            });
+        }
+
+        function getCurrDynamics() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if(!startDate || !endDate) {
+                alert('Введите начальную и конечную дату');
+                return;
+            }
+
+            getCurrData(startDate, endDate)
+            .then((dynamics) => {
+                displayInTable(dynamics);
+            })
+            .catch((error) => {
+                alert(error);
+            })
+        }
+        
+
+        function displayInTable(data) {
+            if (data.length === 0) {
+                alert('Нет данных.')
+                return;
+            }
+
+            const tableBody = document.getElementById('currTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+
+            data.forEach(elem => {
+                const row = document.createElement('tr');
+
+                // дата
+                const dateCell = document.createElement('td');
+                dateCell.textContent = elem.Date.split('T')[0];
+                row.appendChild(dateCell);
+
+                // курс к этой дате
+                const rateCell = document.createElement('td');
+                rateCell.textContent = (elem.Cur_OfficialRate / 10).toFixed(5) + ' BYN';
+                row.appendChild(rateCell);
+
+                tableBody.appendChild(row);
+            });
+        }
+
+    </script>
+</body>
+</html>

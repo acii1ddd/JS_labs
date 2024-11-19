@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Sound_card {
+            #analog_outputs;
+            #analog_inputs;
+            #microphone_inputs;
+            #type;
+            #channel_count;
+            #connection_interface;
+
+            constructor(_analog_outputs, _analog_inputs, _microphone_inputs, _type, _channel_count, _connection_interface) {
+                this.#analog_outputs = _analog_outputs;
+                this.#analog_inputs = _analog_inputs;
+                this.#microphone_inputs = _microphone_inputs;
+                this.#type = _type;
+                this.#channel_count = _channel_count;
+                this.#connection_interface = _connection_interface;
+            }
+
+            // getters
+            get_analog_outputs() {
+                return this.#analog_outputs;
+            }
+            get_analog_inputs() {
+                return this.#analog_inputs;
+            }
+            get_microphone_inputs() {
+                return this.#microphone_inputs;
+            }
+            get_type() {
+                return this.#type;
+            }
+            get_channel_count() {
+                return this.#channel_count;
+            }
+            get_connection_interface() {
+                return this.#connection_interface;
+            }
+
+            // setters
+            set_analog_outputs(_analog_outputs) {
+                this.#analog_outputs = _analog_outputs;
+            }
+            set_analog_inputs(_analog_inputs) {
+                this.#analog_inputs = _analog_inputs;
+            }
+            set_microphone_inputs(_microphone_inputs) {
+                this.#microphone_inputs = _microphone_inputs;
+            }
+            set_type(_type) {
+                this.#type = _type;
+            }
+            set_channel_count(_channel_count) {
+                this.#channel_count = _channel_count;
+            }
+            set_connection_interface(_connection_interface) {
+                this.#connection_interface = _connection_interface;
+            }
+
+            view_info() {
+                document.body.innerHTML += `<p>Аналоговые выходы: ${this.#analog_outputs}</p>`;
+                document.body.innerHTML += `<p>Аналоговые входы: ${this.#analog_inputs}  </p>`;
+                document.body.innerHTML += `<p>Микрофонные входы: ${this.#microphone_inputs}</p>`;
+                document.body.innerHTML += `<p>Тип: ${this.#type}</p>`;
+                document.body.innerHTML += `<p>Количество каналов: ${this.#channel_count}</p>`;
+                document.body.innerHTML += `<p>Интерфейс подключения: ${this.#connection_interface}</p>`;
+            }
+        }
+
+        class Updated_sound_card extends Sound_card {
+            #release_date;
+            #price;
+
+            constructor(_analog_outputs, _analog_inputs, _microphone_inputs, _type, _channel_count, _connection_interface, _release_date, _price) {
+                super(_analog_outputs, _analog_inputs, _microphone_inputs, _type, _channel_count, _connection_interface);
+                this.#release_date = new Date(_release_date);
+                this.#price = _price;
+            }
+
+            // getters
+            get_release_date() {
+                return this.#release_date.toLocaleDateString();
+            }
+            get_price() {
+                return this.#price;
+            }
+
+            // setters
+            set_release_date(_release_date) {
+                this.#release_date = new Date(_release_date);
+            }
+            set_price(_price) {
+                this.#price = _price;
+            }
+
+            view_info() {
+                super.view_info();
+                document.body.innerHTML += `<p>Дата выхода на рынок: ${this.#release_date.toLocaleDateString()}</p>`;
+                document.body.innerHTML += `<p>Стоимость: ${this.#price}</p>`;
+            }
+        }
+
+        function print_cards(cards_arr, message) {
+            document.body.innerHTML += `<p>${message}</p>`;
+            cards_arr.forEach(card => {
+                card.view_info();
+                document.body.innerHTML += `<hr>`;
+            });
+        }
+
+        let cards = [
+            new Updated_sound_card(1, 2, 4, "Дискретная", 7, "USB", "2024-10-15", 620),
+            new Updated_sound_card(2, 3, 6, "Встраиваемая", 8, "PCI", "2022-08-15", 100),
+            new Updated_sound_card(1, 1, 2, "Портативная", 2, "Bluetooth", "2021-05-20", 200),
+            new Updated_sound_card(3, 4, 8, "Профессиональная", 10, "Thunderbolt", "2024-01-10", 300),
+            new Updated_sound_card(2, 2, 5, "Мобильная", 4, "USB", "2023-11-05", 250),
+            new Updated_sound_card(1, 20, 2, "Дискретная", 7, "PCi", "2024-10-15", 620),
+        ];
+
+        // объекты с максимальной стоимостью
+        let max_price = cards.reduce((max, current) => Math.max(max, current.get_price()), 0); // нач знач max
+        let max_price_cards = cards.filter(card => card.get_price() == max_price);
+        print_cards(max_price_cards, "Карты с максимальной стоимостью: ")
+
+        // объекты с минимальной стоимостью
+        let min_price = cards.reduce((min, current) => Math.min(min, current.get_price()), cards[0].get_price()); // нач знач min
+        let min_price_cards = cards.filter(card => card.get_price() == min_price);
+        print_cards(min_price_cards, "Карты с минимальной стоимостью: ")
+
+        // суммарная стоимость всех объектов
+        let total_price = cards.reduce((total, current) => total + current.get_price(), 0)
+        document.body.innerHTML += `<p>Суммарная стоимость всех объектов: ${total_price}</p>`;
+
+        // cредняя стоимость объекта
+        let avg_price = total_price / cards.length;
+        document.body.innerHTML += `<p>Средняя стоимость объекта: ${avg_price.toFixed(3)}</p>`;
+
+        // количество объектов со стоимостью выше средней
+        let count_greater_avg = cards.filter(card => card.get_price() > avg_price).length
+        document.body.innerHTML += `<p>Количество объектов со стоимостью выше средней: ${count_greater_avg}</p>`;
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function check_num(num, error_mes, repeat_mes) {
+            while(isNaN(num)) {
+                    window.alert(error_mes);
+                    num = parseFloat(prompt(repeat_mes));
+            }
+            return num;
+        }
+
+        function print_arr(arr) {
+            document.body.innerHTML += `<p>`;
+            for(let i = 0; i < arr.length; ++i) {
+                document.body.innerHTML += `${arr[i]}   `;
+            }
+            document.body.innerHTML += `</p>`;
+        }
+
+        function generate_arr(size) {
+            let arr = [];
+            for(let i = 0; i < size; i++) {
+                arr[i] =  Math.random().toFixed(1) * 10 - 2;
+            }
+            return arr;
+        }
+
+        let nums = generate_arr(15);
+        print_arr(nums);
+
+        let A = check_num(parseFloat(prompt("Введите A: ")), "Введите корректное значение числа.", "Введите A: ");
+        let B = check_num(parseFloat(prompt("Введите B: ")), "Введите корректное значение числа.", "Введите B: ");
+
+        // ср арифметическ
+        // let sum = 0, average = 0, count = 0;
+        // for(let i = 0; i < nums.length; ++i) {
+        //     if(nums[i] >= A && nums[i] < B) {
+        //         sum += nums[i];
+        //         count += 1;
+        //     }
+        // }
+        // average = sum != 0 ? sum / count : 0;
+
+        // ср арифметическ
+        let sum = nums.filter(num => num >= A && num < B).reduce((sum, num) => sum + num, 0);
+        let count = nums.filter(num => num >= A && num < B).length; 
+        let average = count != 0 ? sum / count : 0;
+
+
+        // кол-во
+        let count_pos_krat_4 = nums.filter((num, index) => num > 0 && (index + 1) % 4 === 0).length;
+
+
+        // кол-во
+        // count = 0;
+        // for(let i = 0; i < nums.length; ++i) {
+        //     if(nums[i] > 0 && (i + 1) % 4 == 0) {
+        //         count += 1;
+        //     }
+        // }
+
+    
+        document.body.innerHTML += `<p>Среднее арифметическое чисел, принадлежащих  промежутку [${A},${B}): ${ average.toFixed(2) }</p>`;
+        document.body.innerHTML += `<p>Количество положительных чисел, стоящих на местах, кратных 4: ${count}</p>`;
+    </script>
+</body>
+</html>

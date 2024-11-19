@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список книг</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+            user-select: none; /* Отключаем стандартное выделение текста */
+        }
+
+        li {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        li.selected {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Список книг</h2>
+    <ul id="bookList">
+        <li>Михаил Булгаков - Мастер и Маргарита</li>
+        <li>Лев Толстой - Война и мир</li>
+        <li>Федор Достоевский - Преступление и наказание</li>
+        <li>Александр Пушкин - Евгений Онегин</li>
+        <li>Иван Тургенев - Отцы и дети</li>
+    </ul>
+
+    <script>
+        "use strict";
+
+        const bookList = document.getElementById('bookList');
+        let lastClickedIndex = null; // Для обработки Shift
+        let items = bookList.querySelectorAll('li'); // Все элементы списка
+
+        bookList.addEventListener('click', function(e) {
+            if (e.target.tagName === 'LI') {
+                let clickedIndex = Array.from(items).indexOf(e.target); //нажатая li
+
+                // Если клавиша Shift нажата
+                if (e.shiftKey && lastClickedIndex !== null) {
+                    let start = Math.min(lastClickedIndex, clickedIndex);
+                    let end = Math.max(lastClickedIndex, clickedIndex);
+                    
+                    // для кажд li между текущим и следующим выделение
+                    for (let i = start; i <= end; i++) {
+                        items[i].classList.add('selected'); 
+                    }
+                } 
+                // нажат ctrl
+                else if (e.ctrlKey) {
+                    e.target.classList.toggle('selected'); // Переключаем выделение для текущего элемента
+                } 
+                // Обычный клик
+                else {
+                    // снимаем выделение со всех элементов
+                    items.forEach(item => item.classList.remove('selected'));
+
+                    // если не выделен, то выделяем
+                    if (!e.target.classList.contains('selected')) {
+                        e.target.classList.add('selected');
+                    }
+                }
+
+                // запомин индекс последнего кликнутого элемента для работы с shift
+                lastClickedIndex = clickedIndex;
+            }
+        });
+    </script>
+
+</body>
+</html>

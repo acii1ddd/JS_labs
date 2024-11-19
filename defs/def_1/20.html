@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function factorial(n) {
+            if (n === 0 || n === 1) {
+                return 1;
+            }
+            return n * factorial(n - 1);
+        }
+
+        function cos_maklaren_rec(x, n) { // n первых членов
+            if (n == 0) {
+                return 1;
+            }
+            else {
+                return Math.pow(-1, n) * Math.pow(x, 2 * n) / factorial(2 * n) + cos_maklaren_rec(x, n - 1);
+            }
+        }
+
+        for (let x = 0.5; x >= 0.1; x -= 0.1) {
+            document.body.innerHTML += `<p>cos(${x.toFixed(2)}) через Math.cos(x): ${Math.cos(x)}</p>`;
+            document.body.innerHTML += `<p>cos(${x.toFixed(2)}) через ряд Маклорена (рекурсия): ${cos_maklaren_rec(x, 10 - 1)}</p>`; // 10 первых членов (9 + нулевой)
+            document.body.innerHTML += `<hr>`;
+        }
+
+    </script>
+</body>
+</html>

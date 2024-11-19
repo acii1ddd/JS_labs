@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        function check_num(num, error_mes, repeat_mes) {
+            while(isNaN(num)) {
+                window.alert(error_mes);
+                num = parseFloat(prompt(repeat_mes));
+            }
+            return num;
+        }
+
+        function convert_to_celsius(farengeit) {
+            return (farengeit - 32) * 5 / 9;
+        }
+
+        let farengeit = check_num(parseFloat(prompt("Введите температуру в фаренгейтах: ")), "Введите корректное значение числа.", "Введите температуру в фаренгейтах: ");
+        let celsius = convert_to_celsius(farengeit);
+
+        document.body.innerHTML += `<p>Температура в фаренгейтах: ${farengeit}</p>`;
+        document.body.innerHTML += `<p>Температура в цельсиях: ${celsius}</p>`;
+
+    </script>
+</body>
+</html>

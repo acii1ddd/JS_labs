@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Sound_card(_analog_outputs, _analog_inputs, _microphone_inputs, _type, _channel_count, _connection_interface) {
+            // св-ва
+            this.analog_outputs = _analog_outputs;
+            this.analog_inputs = _analog_inputs;
+            this.microphone_inputs = _microphone_inputs;
+            this.type = _type;
+            this.channel_count = _channel_count;
+            this.connection_interface = _connection_interface;
+        }
+
+        sound_card.prototype.release_date = new Date("2023-10-15"); // yyyy-mm-dd
+        sound_card.prototype.view_info = function () {
+                document.body.innerHTML += `<p>Аналоговые выходы: ${this.analog_outputs}</p>`;
+                document.body.innerHTML += `<p>Аналоговые входы: ${this.analog_inputs}  </p>`;
+                document.body.innerHTML += `<p>Микрофонные входы: ${this.microphone_inputs}</p>`;
+                document.body.innerHTML += `<p>Тип: ${this.type}</p>`;
+                document.body.innerHTML += `<p>Количество каналов: ${this.channel_count}</p>`;
+                document.body.innerHTML += `<p>Интерфейс подключения: ${this.connection_interface}</p>`;
+                document.body.innerHTML += `<p>Интерфейс подключения: ${this.release_date.toDateString()}</p>`;
+        }
+
+        const card = new Sound_card(2, 3, 2, "Дискретная", 5, "FireWire");
+        card.view_info();
+
+    </script>
+</body>
+</html>

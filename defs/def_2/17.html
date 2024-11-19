@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function print_arr(arr) {
+            document.body.innerHTML += `<p>`;
+            for(let i = 0; i < arr.length; ++i) {
+                document.body.innerHTML += `${arr[i]}   `;
+            }
+            document.body.innerHTML += `</p>`;
+        }
+        
+        function generate_arr(size) {
+            let arr = [];
+            for(let i = 0; i < size; i++) {
+                arr[i] =  Math.random().toFixed(1) * 10 - 2;
+            }
+            return arr;
+        }
+
+        let arr = generate_arr(10);
+        document.body.innerHTML += `<p>Исходный массив:</p>`;
+        print_arr(arr);
+
+        const reversed = arr.reverse();
+        document.body.innerHTML += `<p>Reverse arr:</p>`;
+        print_arr(reversed);
+
+    </script>
+</body>
+</html>

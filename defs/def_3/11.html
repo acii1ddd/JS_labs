@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+
+
+        let strings = [
+            "ldawe ew bonew ulnufnn32i jkkjn.",
+            "32kjn 32jnp&^& gewn we 32kjn 32jnp&^& gewn we 32kjn 32jnp&^& gewn we",
+            "dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew",
+            "dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew",
+            "dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb",
+            "dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew dkhvfb ew",
+        ];
+
+        //  макс длина строки
+        let maxLenght = strings.reduce((maxLen, currStr) => {
+            return Math.max(maxLen, currStr.length);
+        }, 0);
+
+        let longestStrIndexes = strings.map((str, ind) => str.length === maxLenght ? ind : -1) // массив с ind / -1
+                                       .filter(ind => ind !== -1);
+
+        document.body.innerHTML += `<p>Строки: <br>${strings.join('<br>')}</p>`;
+        document.body.innerHTML += `<p>Номер(а) самой длиной строки: ${longestStrIndexes}</p>`;
+
+</script>
+</body>
+</html>

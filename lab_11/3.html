@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <table id="currencyTable">
+        <thead>
+            <th>Валюта</th>
+            <th>Курс к бел. рублю (1 к 1)</th>
+            <th>Курс к Гонконгскому доллару (1 к 1)</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        "use strict";
+
+        async function getCurrencyRate(currCode) {
+            const url = `https://api.nbrb.by/exrates/rates/${currCode}?parammode=2`;
+            const response = await fetch(url); // promise
+            if (!response.ok) { // 200
+                throw new Error("Ошибка при получении курса валюты.");
+            }
+            const data = await response.json(); // promise, if resolve - return dataObj(response), if reject - throw error
+            //data.then();
+            return data;
+        }
+
+        async function displayInTable() {
+            try {
+                const honkongData = await getCurrencyRate('HKD'); // гонконг
+                const georgiaData = await getCurrencyRate('GEL'); // грузия
+                const icelandData = await getCurrencyRate('ISK'); // исладния
+
+                // курсы валют к бел рублю 1 к 1
+                const hkdToBynRate = (honkongData.Cur_OfficialRate / honkongData.Cur_Scale);
+                const gelToBynRate = (georgiaData.Cur_OfficialRate / georgiaData.Cur_Scale);
+                const iskToBynRate = (icelandData.Cur_OfficialRate / icelandData.Cur_Scale);
+
+                // курсы валют грузии и исладнии к гонконгскому доллару (1 к 1)
+                const gelToHkdRate = gelToBynRate / hkdToBynRate;
+                const iskToHkdRate = iskToBynRate / hkdToBynRate;
+
+                const tableBody = document.getElementById('currencyTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+
+                // строка для грузии
+                const gelRow = document.createElement('tr');
+                gelRow.innerHTML = `                       
+                    <td>Грузинский лари</td>
+                    <td>${gelToBynRate.toFixed(5)} BYN</td>
+                    <td>${gelToHkdRate.toFixed(5)} HKD</td>
+                `;
+                tableBody.appendChild(gelRow);
+
+                // строка для исландии
+                const iskRow = document.createElement('tr');
+                iskRow.innerHTML = `
+                    <td>Исландских крона</td>
+                    <td>${iskToBynRate.toFixed(5)} BYN</td>
+                    <td>${iskToHkdRate.toFixed(5)} HKD</td>
+                `;
+                tableBody.appendChild(iskRow);               
+            }
+            catch(error) {
+                alert(error.message);
+            }
+        }
+
+        window.onload = displayInTable();
+
+    </script>
+</body>
+</html>

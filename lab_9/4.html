@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        
+        #rect {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            background-color: #b6025c;
+            border-radius: 5px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div id="rect"></div>
+    
+    <script>
+        "use strict"
+        const rect = document.getElementById('rect');
+        let angle = 0; // начальный угол вращения
+        let centerX = window.innerWidth / 2; // координаты центра
+        let centerY = window.innerHeight / 2;
+        const orbitRadius = 200;
+        
+        function updateRotation() {
+            // новые координаты
+            rect.style.left = centerX + orbitRadius * Math.cos(angle) + 'px';
+            rect.style.top = centerY + orbitRadius * Math.sin(angle) + 'px';
+
+            angle += 0.05;
+            requestAnimationFrame(updateRotation);
+        }
+
+        // setInterval(function() {
+        //     angle += 0.05;
+        //     rect.style.left = centerX + orbitRadius * Math.cos(angle) + 'px';
+        //     rect.style.top = centerY + orbitRadius * Math.sin(angle) + 'px';
+        // }, 8)
+
+        // менять координаты центра
+        document.addEventListener('mousemove', (event) => {
+            centerX = event.clientX;    
+            centerY = event.clientY;
+        });
+
+        updateRotation();
+
+    </script>
+</body>
+</html>

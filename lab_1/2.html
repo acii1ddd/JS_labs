@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+
+        function check_num(num, error_mes, repeat_mes) {
+                while(isNaN(num)) {
+                    window.alert(error_mes);
+                    num = parseFloat(prompt(repeat_mes));
+            }
+            return num;
+        }
+
+        let katet_a = check_num(parseFloat(prompt("Введите длину катета a: ")), "Введите корректное значение числа.", "Введите длину катета a: ");
+        let katet_b = check_num(parseFloat(prompt("Введите длину катета b: ")), "Введите корректное значение числа.", "Введите длину катета b: ");
+
+        let gippotenusa = Math.sqrt(katet_a * katet_a + katet_b * katet_b);
+        let perimetr = katet_a + katet_b + gippotenusa;
+        let square = katet_a * katet_b / 2;
+
+        document.body.innerHTML += `<p style="font-size: 19px"><b>Задание 1:</b> Найти площадь и периметр прямоугольного треугольника.</p>`;
+        document.body.innerHTML += "<img src = 'task.png'>";
+        document.body.innerHTML += "<p><b>Результаты:</b></p>";
+        document.body.innerHTML += "<ul><li>Катет a: " + katet_a.toFixed(2) + "</li><li>Катет b: " + katet_b.toFixed(2) + "</li><li>Гипотенуза c: " + gippotenusa.toFixed(2) + "</li><li>Периметр P: " + perimetr.toFixed(2) + "</li><li>Площадь S: " + square.toFixed(2) + "</li></ul>";
+        
+        document.body.innerHTML += `<p style="font-size: 19px"><b>Задание 2:</b> Посчитать значение переменной b.</p>`;
+        document.body.innerHTML += "<img src = 'task_2.png'>";
+
+        let x = check_num(parseFloat(prompt("Введите x: ")), "Введите корректное значение числа.", "Введите x: ");
+        let y = check_num(parseFloat(prompt("Введите y: ")), "Введите корректное значение числа.", "Введите y: ");
+        let z = check_num(parseFloat(prompt("Введите z: ")), "Введите корректное значение числа.", "Введите z: ");
+        let b = x * (Math.tan(z) + Math.cos(y) * Math.cos(y));
+
+        document.body.innerHTML += "<p><b>Результаты:</b></p>";
+        document.body.innerHTML += "<ul><li>x: " + x.toFixed(2) + "</li><li>y: " + y.toFixed(2) + "</li><li>z: " + z.toFixed(2) + "</li><li>b: " + b.toFixed(2) + "</li></ul>";
+        document.body.innerHTML += "<hr>";
+        document.body.innerHTML += "<p>Скрипт разработал: Ваше Имя</p>";
+        
+    </script>
+</body>
+</html>

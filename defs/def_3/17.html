@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        function generateString() {
+            const evenNums = [0, 2, 4, 6, 8];
+            const letters = 'qwertyuiopasdfghjklzxcvbnm'; // 26 | c 0 - 25
+
+            let result = '';
+            for (let i = 0; i < 10; i++) {
+                if (i % 2 === 0) {
+                    // индекс нечетный для пользов - добав букву
+                    result += letters[Math.floor(Math.random() * letters.length)]; // округ 0.99 * 26 = 25.74 - 25
+                } else {
+                    // индекс четный - добавляем четную цифру
+                    result += evenNums[Math.floor(Math.random() * evenNums.length)];
+                }
+            }
+            return result;
+        }
+
+        let randomString = generateString();
+        document.body.innerHTML += `Сгенерированная строка: ${randomString}`;
+
+    </script>
+</body>
+</html>

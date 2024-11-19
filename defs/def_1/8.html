@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function get_day_time(time) {
+            if (time.getHours() >= 0 && time.getHours() < 6) {
+                return "Ночь";
+            }
+            if (time.getHours() >= 6 && time.getHours() < 12) {
+                return "Утро";
+            }
+            if (time.getHours() >= 12 && time.getHours() < 18) {
+                return "День";
+            }
+            else {
+                return "Вечер";
+            }
+        }
+
+        let current_time = prompt("Введите текущее время (в формате ЧЧ:ММ):");
+        let time_format = /^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/;
+
+        if(time_format.test(current_time)) {
+            let time_parts = current_time.split(":");
+            let current_date = new Date();
+            current_date.setHours(time_parts[0]);
+            current_date.setMinutes(time_parts[1]);
+            let day_time = get_day_time(current_date);
+
+            document.body.innerHTML += `<p>Введенное время: ${current_time}</p>`;
+            document.body.innerHTML += `<p>Время суток: ${day_time}</p>`;
+        }
+        else {
+            window.alert("Неверный формат времени.");
+        }
+
+    </script>
+</body>
+</html>

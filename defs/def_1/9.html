@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function check_num(num, error_mes, repeat_mes) {
+            while(isNaN(num)) {
+                window.alert(error_mes);
+                num = parseFloat(prompt(repeat_mes));
+                }
+            return num;
+        }
+
+        function nod_calc(a, b) {
+            if(a === 0) return b;
+            if(b === 0) return a;
+
+            return nod_calc(b, a % b);
+        }
+
+        let num_1 = check_num(parseFloat(prompt("Введите первое число: ")), "Введите корректное значение числа.", "Введите первое число: ");
+        let num_2 = check_num(parseFloat(prompt("Введите второе число: ")), "Введите корректное значение числа.", "Введите второе число: ");
+
+        let nod = nod_calc(num_1, num_2);
+        document.body.innerHTML += `<p>НОД(${num_1},${num_2}): ${nod}</p>`;
+
+    </script>
+</body>
+</html>

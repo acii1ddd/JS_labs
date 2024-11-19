@@ -1,0 +1,237 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+       
+        <style>
+            
+            #darkBg {
+                display: none;
+                position: fixed;
+                top: 0; /*весь экран () лев верх угол*/ 
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            #modalWindow {
+                display: none;
+                position: fixed;
+                top: 50%; /*лев верх угол в центре*/
+                left: 50%;
+                transform: translate(-50%, -50%); /*Смещает элемент по осям X и Y (влево вверх) на 50% его собственной ширины и высоты. - точно в центре*/
+                background-color: white;
+                padding: 20px;
+                border: 1px solid #ccc;
+                box-shadow: 0 2px 10px rgb(82, 31, 31);
+                z-index: 1000; /*поверх затемнения  */
+            }
+
+            table {
+                width: 100%;
+                border: 1px solid black;
+                margin-top: 20px;
+            }
+
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div id="darkBg"></div>
+        <div id="modalWindow">
+            <h2>Enter Sound Card Prorerties</h2>
+            <form id="cardTable">
+                <label for="analog_outputs">Analog_outputs</label>
+                <input type="number" id="analog_outputs" min="0" required><br><br>
+
+                <label for="analog_inputs">Analog_inputs</label>  
+                <input type="number" id="analog_inputs" min="0" required><br><br>
+                
+                <label for="microphone_inputs">Microphone_inputs</label>
+                <input type="number" id="microphone_inputs" min="0" required><br><br>
+                
+                <label for="type">Type</label>
+                <input type="text" id="type" required><br><br>
+                
+                <label for="channel_count">Channel_count</label>
+                <input type="number" id="channel_count" min="0" required><br><br>
+                
+                <label for="connection_interface">Connection_interface</label>
+                <input type="text" id="connection_interface" required><br><br>
+            </form>
+            <button type="button" onclick="submitForm()">Submit</button>
+        </div>
+
+        <button type="button" onclick="AddCard()">Add Card</button>
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Analog_outputs</th>
+                    <th>Analog_inputs</th>
+                    <th>Microphone_inputs</th>
+                    <th>Type</th>
+                    <th>Channel_count</th>
+                    <th>Connection_interface</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <script>
+            
+        class Sound_card {
+            #analog_outputs;
+            #analog_inputs;
+            #microphone_inputs;
+            #type;
+            #channel_count;
+            #connection_interface;
+
+            constructor(_analog_outputs, _analog_inputs, _microphone_inputs, _type, _channel_count, _connection_interface) {
+                this.#analog_outputs = _analog_outputs;
+                this.#analog_inputs = _analog_inputs;
+                this.#microphone_inputs = _microphone_inputs;
+                this.#type = _type;
+                this.#channel_count = _channel_count;
+                this.#connection_interface = _connection_interface;
+            }
+
+            // getters
+            get_analog_outputs() {
+                return this.#analog_outputs;
+            }
+            get_analog_inputs() {
+                return this.#analog_inputs;
+            }
+            get_microphone_inputs() {
+                return this.#microphone_inputs;
+            }
+            get_type() {
+                return this.#type;
+            }
+            get_channel_count() {
+                return this.#channel_count;
+            }
+            get_connection_interface() {
+                return this.#connection_interface;
+            }
+
+            // setters
+            set_analog_outputs(_analog_outputs) {
+                this.#analog_outputs = _analog_outputs;
+            }
+            set_analog_inputs(_analog_inputs) {
+                this.#analog_inputs = _analog_inputs;
+            }
+            set_microphone_inputs(_microphone_inputs) {
+                this.#microphone_inputs = _microphone_inputs;
+            }
+            set_type(_type) {
+                this.#type = _type;
+            }
+            set_channel_count(_channel_count) {
+                this.#channel_count = _channel_count;
+            }
+            set_connection_interface(_connection_interface) {
+                this.#connection_interface = _connection_interface;
+            }
+
+            view_info() {
+                document.body.innerHTML += `<p>Аналоговые выходы: ${this.#analog_outputs}</p>`;
+                document.body.innerHTML += `<p>Аналоговые входы: ${this.#analog_inputs}  </p>`;
+                document.body.innerHTML += `<p>Микрофонные входы: ${this.#microphone_inputs}</p>`;
+                document.body.innerHTML += `<p>Тип: ${this.#type}</p>`;
+                document.body.innerHTML += `<p>Количество каналов: ${this.#channel_count}</p>`;
+                document.body.innerHTML += `<p>Интерфейс подключения: ${this.#connection_interface}</p>`;
+            }
+        }
+
+        function AddCard() {
+            const window = document.getElementById('modalWindow');
+            const darkBg = document.getElementById('darkBg');
+
+            document.getElementById('analog_outputs').value = '';
+            document.getElementById('analog_inputs').value = '';
+            document.getElementById('microphone_inputs').value = '';
+            document.getElementById('type').value = '';
+            document.getElementById('channel_count').value = '';
+            document.getElementById('connection_interface').value = '';
+
+            window.style.display = 'block';
+            darkBg.style.display = 'block';
+        }
+
+        function submitForm() {
+            const analog_outputs = document.getElementById('analog_outputs').value;
+            const analog_inputs = document.getElementById('analog_inputs').value;
+            const microphone_inputs = document.getElementById('microphone_inputs').value;
+            const type = document.getElementById('type').value;
+            const channel_count = document.getElementById('channel_count').value;
+            const connection_interface = document.getElementById('connection_interface').value;
+
+            let isValid = true;
+            if (checkRegular(analog_outputs, /^(0|[1-9]\d*)$/) &&
+                checkRegular(analog_inputs, /^(0|[1-9]\d*)$/) &&
+                checkRegular(microphone_inputs, /^(0|[1-9]\d*)$/) &&
+                checkRegular(type, /.+/) &&
+                checkRegular(channel_count, /^(0|[1-9]\d*)$/) &&
+                checkRegular(connection_interface, /^.+$/)
+                ) 
+            {
+                const newCard = new Sound_card(analog_outputs, analog_inputs, microphone_inputs, type, channel_count, connection_interface);
+                updateTable(analog_outputs, analog_inputs, microphone_inputs, type, channel_count, connection_interface);
+                closeWindow();
+            }
+            else {
+                alert('Заполните поля корректно!');
+            }
+        }
+
+        function checkRegular(value, reg) {
+            return reg.test(value);
+        }
+
+        function updateTable(analog_outputs, analog_inputs, microphone_inputs, type, channel_count, connection_interface) {
+            const table = document.getElementById('table');
+            const row = document.createElement('tr');
+
+            createTd(row, analog_outputs);
+            createTd(row, analog_inputs);
+            createTd(row, microphone_inputs);
+            createTd(row, type);
+            createTd(row, channel_count);
+            createTd(row, connection_interface);
+            table.appendChild(row);
+        }
+
+        function createTd(row, value) {
+            const newTd = document.createElement('td'); // table data
+            newTd.textContent = value;
+            row.appendChild(newTd);
+        }
+
+        function closeWindow() {
+            const window = document.getElementById('modalWindow');
+            const darkBg = document.getElementById('darkBg');
+            window.style.display = 'none';
+            darkBg.style.display = 'none';
+        }
+
+        </script>
+    </body>
+    </html>

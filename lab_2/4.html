@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        document.title = "Загорцев Виктор";
+
+        function isTriangular(num) {
+            for (let n = 1; n * (n + 1) / 2 <= num; n++) { // треуг
+                if (n * (n + 1) / 2 === num) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        let table = "<table border='1' cellpadding='5'>";
+        let counter = 1;
+        for(let i = 0; i < 10; i++) {
+            table += `<tr>`;
+            for(let j = 0; j < 10; j++) {
+                if (isTriangular(counter)) {   
+                    table += `<td style= "color:red;">` + counter + `</td>`;
+                }
+                else {
+                    table += "<td>" + counter + "</td>";
+                }
+                counter++;
+            }
+            table += `</tr>`;
+        }
+        table += "</table>";
+        document.body.innerHTML += table;
+
+    </script>
+</body>
+</html>

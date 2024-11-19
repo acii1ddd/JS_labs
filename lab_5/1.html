@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function delete_char(str, char) {
+            let ind = str.indexOf(',', 0);
+            if(ind == -1 || str.indexOf(char) == -1) { // есть и , и A
+                return -1;
+            }
+            while(ind != -1) {
+                //document.body.innerHTML += `<p><b>Идекс: ${ind}<b></p>`; // 6 12 32
+                if(str[ind + 1] == char) {
+                    str = str.slice(0, ind + 1) + str.slice(ind + 2, str.length); // не включ ind + 1 (не включ last)
+                }
+                ind = str.indexOf(',', ind + 1);
+            }
+            return str;
+        }
+
+        function test(str) {
+            document.body.innerHTML += `<p>Исходная строка: <b>${str}<b></p>`;
+            document.body.innerHTML += `<p>Длина: ${str.length}</p>`;
+            
+            let char = 'A';
+            let new_str = delete_char(str, char);
+            if(new_str == -1 || new_str == str) {
+                document.body.innerHTML += `<p>Нет символа <b>${char}</b>, стоящего после <b>','</b>.</p>`;
+            }
+            else {
+                document.body.innerHTML += `<p>После удаления каждого символа '${char}', стоящего после <b>','</b>: <b>${new_str}</b></p>`;
+                document.body.innerHTML += `<p>Длина: ${new_str.length}</p>`;
+            }
+
+            let BC_matches = str.match(/BC/g); // все совпадения / null
+            let count_BC = BC_matches ? BC_matches.length : 0;
+            document.body.innerHTML += `<p>Количество пар 'BC': ${count_BC}</p>`;
+            document.body.innerHTML += `<hr>`;
+        }
+
+        let str = `ksgfiv,,A kdb,a..A_BCf!!!ieuagCB_@cd,AdsuBC.BCB`; // 2A, 3BC
+        let str2 = `BCBC--12BC_CD++.A,___,A;sif,a.A+BC`; // 1A, 4BC
+        let str3 = `ksgfivA, kdba,.A_CBB.Cf!,!!ieuagCB_@ABdCBdsu__,abc`; // 0, 0
+        let str4 = `ksgfiv,...,,._CB,,,C,D,F,G,B.Cf!,!!ieuagCB_@BdCBdsu__,bc`; // 0, 0
+        
+        test(str);
+        test(str2);
+        test(str3);
+        test(str4);
+
+    </script>
+</body>
+</html>

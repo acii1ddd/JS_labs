@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function print_arr(arr) {
+            document.body.innerHTML += `<p>`;
+            // for(let i = 0; i < arr.length; ++i) {
+            //     document.body.innerHTML += `${arr[i]}  `;                
+            // }
+            arr.forEach(elem => {
+                 document.body.innerHTML += `${elem}  `;                
+             });
+            document.body.innerHTML += `</p>`;
+        }
+
+        let triangular_nums = Array.from({length: 10}, (_, n) => (n + 1) * (n + 2) / 2);
+        // for(let n = 1; n <= 10; ++n) {
+        //     triangular_nums.push(n * (n + 1) / 2);
+        // }
+
+        print_arr(triangular_nums);
+
+        let kvd_nums = Array.from({length: 10}, (_, i) => (i + 1) ** 2); // с 1
+        // for(let i = 1; i <= 10; ++i) {
+        //     kvd_nums.push(i ** 2);
+        // }
+        print_arr(kvd_nums);        
+        
+        let rez = triangular_nums.concat(kvd_nums);        
+        print_arr(rez);
+
+        rez.sort((a, b) => b - a);
+        print_arr(rez);
+    </script>
+</body>
+</html>

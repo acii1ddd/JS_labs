@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        canvas {
+            border: 1px solid black;
+        }
+
+    </style>
+
+</head>
+
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+<body>
+    <script>
+        "use strict";
+        class Rectangle {
+            #width;
+            #height;
+
+            constructor(_width, _height) {
+                this.#width = _width;
+                this.#height = _height;
+            }
+
+            // getters
+            get width() {
+                return this.#width;
+            }
+            get height() {
+                return this.#height;
+            }
+
+            // setters
+            set width(_width) {
+                if (_width > 0) {
+                    this.#width = _width;
+                }
+                else {
+                    alert('Ширина должна быть больше 0');
+                }
+            }
+            set height(_height) {
+                if (_height > 0) {
+                    this.#height = _height;
+                } 
+                else {
+                    alert('Высота должна быть больше 0');
+                }
+            }
+
+            get perimetr() {
+                return (this.#width + this.#height) * 2;
+            }
+
+            calcSquare() {
+                return this.#width * this.#height;
+            }
+
+            viewInfo() {
+                document.body.innerHTML += `<p>Ширина: ${this.#width}</p>`;
+                document.body.innerHTML += `<p>Аналоговые входы: ${this.#height}</p>`;
+                document.body.innerHTML += `<p>Площадь: ${this.calcSquare()}</p>`;
+                document.body.innerHTML += `<p>Периметр: ${this.perimetr}</p>`;
+            }
+
+            draw() {
+                const canvas = document.getElementById('canvas');
+                const draw = canvas.getContext('2d');
+                if (draw != null) {
+                    draw.clearRect(0, 0, canvas.width, canvas.height);
+                    draw.fillStyle = 'green';
+                    draw.fillRect(50, 50, this.#width, this.#height);
+                }
+            }
+        }
+
+        const rect = new Rectangle(200, 150);
+        rect.viewInfo();
+        rect.draw('canvas');
+
+    </script>
+</body>
+</html>

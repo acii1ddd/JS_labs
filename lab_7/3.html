@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<style>
+
+    ul {
+        list-style-type: none;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+
+</style>
+
+<body>
+    <h2>Дерево вложенных директорий</h2>
+    <ul id="directory-tree">
+        <li>
+            <span class="folder">Папка 1</span>
+            <ul class="hide">
+                <li>
+                    <span class="folder">Подпапка 1.1</span>
+                    <ul class="hide">
+                        <li>Файл 1.1</li>
+                        <li>Файл 1.2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <span class="folder">Папка 2</span>
+            <ul class="hide">
+                <li>Файл 2.1</li>
+                <li>Файл 2.2</li>
+                <li>Файл 2.3</li>
+            </ul>
+        </li>
+
+        <li>
+            <span class="folder">Папка 3</span>
+            <ul class="hide">
+                <li>
+                    <span class="folder">Подпапка 3.1</span>
+                    <ul class="hide">
+                        <li>Файл 3.1.1</li>
+                        <li>Файл 3.1.2</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="folder">Подпапка 3.2</span>
+                    <ul class="hide">
+                        <li>Файл 3.2.1</li>
+                        <li>Файл 3.2.2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span class="folder">Пустая папка</span>
+        </li>
+    </ul>
+
+    <script>
+        "use strict";
+
+        let folders = document.querySelectorAll('.folder'); // class
+        
+        folders.forEach(folder => {
+            folder.addEventListener('click', function(e) {
+                let subItem = folder.nextElementSibling; // one in its parent's children list
+                if (subItem) {                           // пустая папка 
+                    subItem.classList.toggle('hide'); // добав или удал класс
+                }
+                event.stopPropagation();
+            });
+
+            folder.addEventListener('mouseenter', () => {
+                folder.classList.add('bold');
+            });
+
+            folder.addEventListener('mouseleave', () => {
+                folder.classList.remove('bold'); // удаляем класс при уходе
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function encrypt_char(char) {
+            if(char >= 'а' && char <= 'я') {
+                return char === 'я' ? 'а' : String.fromCharCode(char.charCodeAt(0) + 1);
+            }
+
+            if(char >= 'А' && char <= 'Я') {
+                return char === 'Я' ? 'А' : String.fromCharCode(char.charCodeAt(0) + 1);
+            }
+
+            if(char >= 'a' && char <= 'z') {
+                return char === 'z' ? 'a' : String.fromCharCode(char.charCodeAt(0) + 1);
+            }
+
+            if(char >= 'A' && char <= 'Z') {
+                return char === 'Z' ? 'A' : String.fromCharCode(char.charCodeAt(0) + 1);
+            }
+            // символ без изменений, если он не буква
+            return char;
+        }
+
+        function encrypt_str(str) {
+            let encrypt_str = '';
+            for(let i = 0; i < str.length; i++) {
+                encrypt_str += encrypt_char(str[i]);
+            }
+            return encrypt_str;
+        }
+
+        // rus little - 1072-1104 ё - 1105
+        // rus big - 1040-1071
+        // en little - 97-122
+        // en big - 65-90
+       
+        let str1 = `Написать простейшую программу шифрования. Программа каждую букву заменяет на следующую за ней в алфавите («я» переходит в «а»).`;
+        let str2 = `The Quick Brown Fox Jumps Over The Lazy Dog.`;
+
+        let update_str1 = encrypt_str(str1);
+        let update_str2 = encrypt_str(str2);
+
+        document.body.innerHTML += `<p><b>Исходная строка:</b> ${str1}</p>`;
+        document.body.innerHTML += `<p><b>Зашифрованная строка</b> ${update_str1}</p>`;
+        document.body.innerHTML += `<hr>`;
+        document.body.innerHTML += `<p><b>Исходная строка:</b> ${str2}</p>`;
+        document.body.innerHTML += `<p><b>Зашифрованная строка</b> ${update_str2}</p>`;
+
+    </script>
+</body>
+</html>

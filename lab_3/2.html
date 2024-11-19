@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <script>
+        "use strict";
+
+        function check_num(num, error_mes, repeat_mes) {
+                while(isNaN(num)) {
+                    window.alert(error_mes);
+                    num = parseFloat(prompt(repeat_mes));
+            }
+            return num;
+        }
+
+        function calc_gippotenusa(katet_1, katet_2) {
+            return Math.sqrt(katet_1 * katet_1 + katet_2 * katet_2);
+        }
+
+        function calc_perimetr(...sides) { // массив
+            return sides.reduce((sum, side) => sum + side, 0); // func, начальн. знач
+        }
+
+        function calc_square(katet_1, katet_2) {
+            return katet_1 * katet_2 / 2;
+        }
+
+        function calc(katet_1, katet_2) {
+            let gippotenusa = calc_gippotenusa(katet_1, katet_2);
+            return {
+                gippotenusa: gippotenusa,
+                perimetr: calc_perimetr(katet_1, katet_2, gippotenusa),
+                square: calc_square(katet_1, katet_2) 
+            }
+        }
+
+        let katet_a = check_num(parseFloat(prompt("Введите длину катета a: ")), "Введите корректное значение числа.", "Введите длину катета a: ");
+        let katet_b = check_num(parseFloat(prompt("Введите длину катета b: ")), "Введите корректное значение числа.", "Введите длину катета b: ");
+
+        //let gippotenusa = calc_gippotenisa(katet_a, katet_b);
+        //let perimetr = calc_perimetr(katet_a, katet_b, gippotenusa);
+        //let square = calc_square(katet_a, katet_b);
+
+        let { gippotenusa, perimetr, square } = calc(katet_a, katet_b);
+        document.body.innerHTML += `<p style="font-size: 19px"><b>Задание 1:</b> Найти площадь и периметр прямоугольного треугольника.</p>`;
+        document.body.innerHTML += "<img src = './img/triangle.png'>";
+        document.body.innerHTML += "<p><b>Результаты:</b></p>";
+        document.body.innerHTML += "<ul><li>Катет a: " + katet_a.toFixed(2) + "</li><li>Катет b: " + katet_b.toFixed(2) + "</li><li>Гипотенуза c: " + gippotenusa.toFixed(2) + "</li><li>Периметр P: " + perimetr.toFixed(2) + "</li><li>Площадь S: " + square.toFixed(2) + "</li></ul>";
+    </script>
+ </body>
+ </html>

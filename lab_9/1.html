@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        iframe {
+            flex-grow: 1; /* может расшир чтоб занять 100vh*/
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+    
+<body>
+    <div class="browser-controls">
+        <button onclick="goBack()">Back</button>
+        <button onclick="goForward()">Forward</button>
+        <input type="text" id="url" placeholder="http://">
+        <button onclick="loadPage()">Load</button>
+
+        <label for="newWindow">In new tab</label>
+        <input type="checkbox" id="newWindow">
+    </div>
+
+    <iframe id="browser-frame"  frameborder="1"></iframe>
+
+    <script>
+        "use strict";
+
+        const urlInput = document.getElementById('url');
+        const browserFrame = document.getElementById('browser-frame');
+        const newWindowCheckBox = document.getElementById('newWindow');
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function goForward() {
+            window.history.forward();
+        }
+
+        function loadPage() {
+            const url = urlInput.value;
+            if (newWindowCheckBox.checked) {
+                window.open(url, '_blank');
+            }
+            else {
+                browserFrame.src = url;
+            }   
+        }
+
+    </script>
+</body>
+</html>

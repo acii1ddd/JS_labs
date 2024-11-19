@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const Sound_card = {
+            analog_outputs: 2,
+            analog_inputs: 3,
+            microphone_inputs: 1,
+            type: "Встроенная",
+            channel_count: "5",
+            connection_interface: "PCI-E",
+
+
+            view_info: function() {
+                document.body.innerHTML += `<p>Аналоговые выходы: ${this.analog_outputs}</p>`;
+                document.body.innerHTML += `<p>Аналоговые входы: ${this.analog_inputs}  </p>`;
+                document.body.innerHTML += `<p>Микрофонные входы: ${this.microphone_inputs}</p>`;
+                document.body.innerHTML += `<p>Тип: ${this.type}</p>`;
+                document.body.innerHTML += `<p>Количество каналов: ${this.channel_count}</p>`;
+                document.body.innerHTML += `<p>Интерфейс подключения: ${this.connection_interface}</p>`;
+            }
+        };
+
+        Sound_card.view_info();
+
+    </script>
+</body>
+</html>

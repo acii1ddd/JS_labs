@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calc_gippotenusa(katet_1, katet_2) {
+            return Math.sqrt(katet_1 * katet_1 + katet_2 * katet_2);
+        }
+        function calc_perimetr(...sides) { // массив
+            return sides.reduce((sum, side) => sum + side, 0); // func, начальн. знач
+        }
+        function calc_square(katet_1, katet_2) {
+            return katet_1 * katet_2 / 2;
+        }
+        
+        function calc(katet_1, katet_2) {
+            let gippotenusa = calc_gippotenusa(katet_1, katet_2);
+            return {
+                gippotenusa: gippotenusa,
+                perimetr: calc_perimetr(katet_1, katet_2, gippotenusa),
+                square: calc_square(katet_1, katet_2) 
+            }
+        }
+
+        b_func = (x, y, z) => x * (Math.tan(z) + Math.cos(y) ** 2);
+
+        const carried_calc = function(katet_1) {
+            return function(katet_2) {
+                let gippotenusa = calc_gippotenusa(katet_1, katet_2)
+                return {
+                    gippotenusa2: gippotenusa,
+                    perimetr2: calc_perimetr(katet_1, katet_2, gippotenusa),
+                    square2: calc_square(katet_1, katet_2)
+                }
+            }
+        }
+
+        const carried_b_func = x => y => z => x * (Math.tan(z) + Math.cos(y) ** 2);
+
+        let { gippotenusa, perimetr, square } = calc(3, 4);
+        let b = b_func(2, 3, 4);
+
+        document.body.innerHTML += `<p>Без каррирования: </p>`;
+        document.body.innerHTML += `<p>gippotenusa: ${ gippotenusa }</p>`;
+        document.body.innerHTML += `<p>perimetr: ${ perimetr }</p>`;
+        document.body.innerHTML += `<p>square: ${ square }</p>`;
+        document.body.innerHTML += `<p>b = ${ b }</p>`;
+        document.body.innerHTML += `<hr>`;
+
+        //let { gippotenusa2, perimetr2, square2 } = carried_calc(3)(4);
+        let oneKatet = carried_calc(3); // func
+        let { gippotenusa2, perimetr2, square2 } = oneKatet(4);
+        let b2 = carried_b_func(2)(3)(4);
+
+        document.body.innerHTML += `<p>gippotenusa: ${ gippotenusa2 }</p>`;
+        document.body.innerHTML += `<p>perimetr: ${ perimetr2 }</p>`;
+        document.body.innerHTML += `<p>square: ${ square2 }</p>`;
+        document.body.innerHTML += `<p>b = ${ b2 }</p>`;
+
+    </script>
+</body>
+</html>

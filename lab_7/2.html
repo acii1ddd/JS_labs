@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Список ссылок</h1>
+    <ul id="link-list">
+        <li><a href="https://www.google.com">google</a></li>
+        <li><a href="/about">about</a></li>
+        <li><a href="https://www.github.com">github</a></li>
+        <li><a href="/accounts">accounts</a></li>
+    </ul>
+
+    <style>
+        .underline {
+            text-decoration: underline dashed;
+        }
+        
+    </style>
+
+    <script>
+        "use strict";
+        
+        const links = document.querySelectorAll('#link-list a'); // все ссылки a, которые находятся внутри элемента с id link-list
+
+        links.forEach(link => {
+            if (link.href.startsWith('https://') || link.href.startsWith('http://')) {
+                link.classList.add('underline');
+            }
+        });
+
+    </script>
+</body>
+</html>

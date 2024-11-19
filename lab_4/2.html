@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function print_arr(arr) {
+            document.body.innerHTML += `<p>`;
+            arr.forEach(elem => {
+                 document.body.innerHTML += `${elem}  `;                
+            });
+            document.body.innerHTML += `</p>`;
+        }
+
+        //let nums = [];
+        let length = 15;
+        // for(let i = 0; i < length; i++) {
+        //     nums[i] =  Math.random().toFixed(1) * 10;
+        // }
+
+        let nums = Array.from({length}, () => Math.random().toFixed(1) * 10);
+        print_arr(nums);
+
+        let max_ind = nums.indexOf(Math.max(...nums));
+        let prev_last = nums[length - 2]; // предпоследний
+        document.body.innerHTML += `<p>Индекс максимального: ${max_ind}</p>`;
+        document.body.innerHTML += `<p>Предпоследний: ${prev_last}</p>`;
+
+        let max = nums[max_ind];
+        nums[max_ind] = nums[length - 2];
+        nums[length - 2] = max;
+
+        document.body.innerHTML += `<p>Поменять местами максимальный элемент с предпоследним элементом массива: </p>`;
+        print_arr(nums);
+
+    </script>
+</body>
+</html>

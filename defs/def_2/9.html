@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+
+        function print_arr(arr) {
+            document.body.innerHTML += `<p>`;
+            for(let i = 0; i < arr.length; ++i) {
+                document.body.innerHTML += `${arr[i]}   `;
+            }
+            document.body.innerHTML += `</p>`;
+        }
+        
+        function generate_arr(size) {
+            let arr = [];
+            for(let i = 0; i < size; i++) {
+                arr[i] =  Math.random().toFixed(1) * 10 - 2;
+            }
+            return arr;
+        }
+
+        function sumBetween(arr, downBorder, highBorder) {
+            return arr.slice(downBorder, highBorder).reduce((sum, elem) => sum + elem, 0);
+        }
+
+        let arr = generate_arr(10);
+        print_arr(arr);
+
+        let max = arr.indexOf(Math.max(...arr));
+        let min = arr.indexOf(Math.min(...arr));
+        if (max < min) {
+            let temp = min;
+            min = max;
+            max = temp;
+        }
+
+        document.body.innerHTML += `<p>Минимум: ${min}</p>`;
+        document.body.innerHTML += `<p>Максимум: ${max}</p>`;
+
+        let sum = sumBetween(arr, min, max);
+        document.body.innerHTML += `<p>Сумма элементов: ${sum}</p>`;
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>ООО "Евроторг"</h3>
+    <h3 style="margin-left: 10px">СПАСИБО ЗА ПОКУПКУ!</h3>
+    <script>
+        "use strict";
+        let curr_date = new Date().toLocaleString();
+        document.body.innerHTML += `<p style="font-size: 18px">Дата покупки: ${curr_date}</p>`;
+
+        let all_sum = parseFloat(prompt("Введите общую сумму покупки: "));
+        while(isNaN(all_sum)) {
+            window.alert("Введите корректное значение числа.");
+            all_sum = parseFloat(prompt("Введите общую сумму покупки: "));
+        }
+        
+        let discount_percent = parseFloat(prompt("Введите размер скидки: "));
+        while(isNaN(discount_percent)) {
+            window.alert("Введите корректное значение числа.");
+            discount_percent = parseFloat(prompt("Введите размер скидки: "));
+        }
+        let discount = all_sum * (discount_percent / 100);
+        let sum_with_discount = all_sum - discount;
+    
+        document.body.innerHTML += `<h3>ИТОГО:</h3>`;
+        //document.write(`<h3>ИТОГО</h3>`)
+        document.body.innerHTML += `<p style="font-size: 19px;font-weight:bold;margin-left: 30px">${ all_sum.toFixed(2) } BYN</p>`;
+        document.body.innerHTML += `<p style="font-size: 18px">Ваша скидка: ${ discount_percent.toFixed(2) }%</p>`;
+        document.body.innerHTML += `<p style="font-size: 18px;margin-left: 70px">${ discount.toFixed(2) } BYN</p>`;
+        document.body.innerHTML += `<h3>СУММА СО СКИДКОЙ:</h3>`;
+        document.body.innerHTML +=`<h3 style="margin-left: 30px">${ sum_with_discount.toFixed(2) } BYN</h3>`;
+    </script>
+</body>
+</html>

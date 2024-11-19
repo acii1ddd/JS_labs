@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       "use strict";
+
+       function weekDay(size, day, color) {
+            document.body.innerHTML += `<p style="font-size: ${size}em;color:${color}">` + day + `</p>`;
+       }
+
+       weekDay(7, "Понедельник", "black");
+       weekDay(6, "Вторник", "gray");
+       weekDay(5, "Среда", "darkblue");
+       weekDay(4, "Четверг", "blue");
+       weekDay(3, "Пятница", "purple");
+       weekDay(2, "Суббота", "fuchsia");
+       weekDay(1, "Воскресенье", "red");
+        
+    </script>
+</body>
+</html>

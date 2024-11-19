@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        function test(str) {
+            document.body.innerHTML += `<p><b>Исходная строка:</b> ${str}</p>`;
+            let words = str.split(/[,! ?:.;]+/); // + - неск раз
+            
+            let words_includes_i_count = words.filter(word => word.includes('и')).length; // для кажд word
+
+            let first_word_end_ind = words[0].length;
+            let second_word_start_ind = str.indexOf(words[1]); // индекс начала второго слова (перв символа)
+            let second_word_end_ind = second_word_start_ind + words[1].length;
+
+            let first = str.slice(0, first_word_end_ind);
+            let separator = str.slice(first_word_end_ind, second_word_start_ind);
+            let second = str.slice(second_word_start_ind, second_word_end_ind);
+            
+            let after_second = str.slice(second_word_end_ind, str.length);
+            let swap_str = second + separator + first + after_second;
+
+            document.body.innerHTML += `<p><b>Количество слов, в которых буква 'и' встречается хотя бы один раз:</b> ${words_includes_i_count}</p>`;
+            document.body.innerHTML += `<p><b>Поменять местами первое и второе слово: </b>${swap_str}</p>`;
+            document.body.innerHTML += `<hr>`;
+        }
+
+        let str = "Привет, как дела! Всё хорошо? Да, отлично.";
+        let str1 = "Время летит, как стрелы!";
+        let str2 = "Мир, полный чудес и возможностей.";
+        let str3 = "Сегодня солнечный день; давай пойдем на улицу!";
+        let str4 = "Учитель сказал: \"Чтение развивает ум!\" Все должны это помнить.";
+        let str5 = "Скоро весна: птицы вернутся, цветы расцветут!";
+
+        test(str);
+        test(str1);
+        test(str2);
+        test(str3);
+        test(str4);
+        test(str5);
+        
+    </script>
+</body>
+</html>

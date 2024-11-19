@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        document.title = "Загорцев Виктор";
+        let lang = prompt("Введите значение языка: ");
+        if(lang == "ru") {
+            document.body.innerHTML += "Русский";
+        }
+        else if (lang == "en") {
+            document.body.innerHTML += "Английский";
+        }
+        else if (lang == "fr") {
+            document.body.innerHTML += "Французский";
+        }
+        else if (lang == "de") {
+            document.body.innerHTML += "Немецкий";
+        }
+        else {
+            document.body.innerHTML += "Язык неизвестен";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function print_arr(arr) {
+            document.body.innerHTML += `<p>`;
+            for(let i = 0; i < arr.length; ++i) {
+                document.body.innerHTML += `${arr[i]}   `;
+            }
+            document.body.innerHTML += `</p>`;
+        }
+
+        function compareFruits(word1, word2) {
+            if(word1.length < word2.length) {
+                return -1;
+            }
+            if(word1.length > word2.length) {
+                return 1;
+            }
+            if(word1.length == word2.length) {
+                return 0;
+            }
+        }
+        
+        fruits = ["apple", "pineapple", "mango", "melon", "grape"];
+        citrus = ["orange", "lemon", "lime"];
+        print_arr(fruits);
+
+        print_arr(citrus);
+
+        fruits = fruits.concat(citrus);
+        print_arr(fruits);
+
+        fruits[fruits.length] = "pear";
+        fruits[fruits.length] = "cherry";
+        fruits[fruits.length] = "plum";
+        fruits[fruits.length] = "raspberry";
+        fruits[fruits.length] = "strawberry";
+        print_arr(fruits);
+
+        fruits = fruits.slice(0, -3); // не включ -3
+        print_arr(fruits);
+
+        fruits.sort((word1, word2) => word1.toLowerCase().localeCompare(word2.toLowerCase()));
+        document.body.innerHTML += `<p><b>В алфавитном порядке массив fruits: </b></p>`;
+        print_arr(fruits);
+
+        fruits.sort((word1, word2) => word2.toLowerCase().localeCompare(word1.toLowerCase()));
+        document.body.innerHTML += `<p><b>В обратном алфавитном порядке: </b></p>`;
+        print_arr(fruits);
+
+
+        fruits.sort(compareFruits);
+        document.body.innerHTML += `<p><b>Отсортированный по длине слов: </b></p>`;
+        print_arr(fruits);
+
+    </script>
+</body>
+</html>

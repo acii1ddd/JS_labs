@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+
+        function mix_word_letters(word) {
+            if (word.length <= 2) {
+                return word;
+            }
+            let middle = word.slice(1, -1);
+            let mixed_middle = middle.split('').sort(() => Math.random() * 1000 - 500).join(''); // -0.5 - 0.5
+            return word[0] + mixed_middle + word[word.length - 1];
+        }
+
+        function mix_str(str) {
+            return str.split(' ').map(mix_word_letters).join(' '); // для кажд слова
+        }
+
+        let str1 = `Единство предмета речи — это тема высказывания .`;
+        let str2 = `Завершённость высказывания связана со смысловой цельностью текста .`;
+        let str3 = `Показателем законченности текста является возможность подобрать к нему заголовок , отражающий его содержание .`;
+        //let str = `Написать`;
+        str1 = mix_str(str1);
+        str2 = mix_str(str2);
+        str3 = mix_str(str3);
+        document.body.innerHTML += `<p>Перемешаная строка: ${str1}</p>`;
+        document.body.innerHTML += `<p>Перемешаная строка: ${str2}</p>`;
+        document.body.innerHTML += `<p>Перемешаная строка: ${str3}</p>`;
+
+    </script>
+</body>
+</html>

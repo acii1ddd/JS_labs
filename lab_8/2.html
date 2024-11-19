@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form class="form">
+        <label for="passportSeria">Серия паспорта</label>
+        <input type="text" id="passportSeria">
+        <span class="error" id="passportSeriaError"></span><br><br>
+        
+        <label for="passportNumber">Номер паспорта</label>
+        <input type="text" id="passportNumber">
+        <span class="error" id="passportNumberError"></span><br><br>
+        
+        <label for="blankNumber">Номер бланка</label>
+        <input type="text" id="blankNumber">
+        <span class="error" id="blankNumberError"></span><br><br>
+
+        <label for="subjectSelect">Выберите предмет</label>
+        <select id="subjectSelect">
+            <option value="" selected hidden>Выберите предмет</option>
+            <option value="bel">Белорусский</option>
+            <option value="rus">Русский</option>
+            <option value="math">Математика</option>
+            <option value="phys">Физика</option>
+        </select>
+        <span class="error" id="subjectSelectError"></span><br><br>
+
+        <img src="./captcha.png" alt="captcha" width="300" height="100"><br><br>
+        <label for="pictureCode">Код на картинке</label>
+        <input type="text" id="pictureCode">
+        <span class="error" id="pictureCodeError"></span><br><br>
+
+        <button type="button" onclick="validateInput()">Найти</button>
+
+    </form>
+
+    <style>
+        
+        .form {
+            padding: 20px;
+        }
+
+        .error {
+            color: red;
+            margin-left: 10px;
+        }
+        
+    </style>
+
+    <script>
+        "use strict";
+        function validateInput() {
+            clearErrors();
+            const passportSeria = document.getElementById('passportSeria').value;
+            const passportNumber = document.getElementById('passportNumber').value;
+            const blankNumber = document.getElementById('blankNumber').value;
+            const subjectSelect = document.getElementById('subjectSelect').value;
+            const pictureCode = document.getElementById('pictureCode').value;
+
+            let isValid = true;
+
+            if (!/^[A-Z]{2}$/.test(passportSeria)) { // не проход проверка серии паспорта
+                showError('passportSeriaError', 'Серия паспорта должна состоять из 2 латинских букв');
+                isValid = false;
+            }
+
+            if (!/^\d{7}$/.test(passportNumber)) { // проверка номера паспорта
+                showError('passportNumberError', 'Номер паспорта должен состоять из 7 цифр');
+                isValid = false;
+            }
+
+            if (!/^\d{7}$/.test(blankNumber)) { // проверка номера бланка
+                showError('blankNumberError', 'Номер бланка должен состоять из 7 цифр');
+                isValid = false;
+            }
+
+            if (subjectSelect === "") { // Выбор предмета
+                showError('subjectSelectError', 'Выберите предмет');
+                isValid = false;
+            }
+
+            if (!(pictureCode === '424636')) { // проверка кода на картинке
+                showError('pictureCodeError', 'Введите код с картинки');
+                isValid = false;
+            }
+
+            if (isValid) {
+                clearErrors();
+                alert('good');
+            }
+        }
+
+        function showError(elementId, message) {
+            document.getElementById(elementId).textContent = message; // span
+        }
+
+        function clearErrors() {
+            // все span
+            let errors = document.querySelectorAll('.error');
+            errors.forEach(elem => {
+                elem.textContent = '';
+            });
+        }
+        
+    </script>
+</body>
+</html>

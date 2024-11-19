@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function arctg_taylor(x) {
+        //     let result = 0;
+        //     let term; // текущ член ряда
+        //     let n = 0;
+        //     let precision = 1e-10; // точность
+        //     let sign = 1; // знак члена ряда
+
+        //     do {
+        //         result += Math.pow(-1, n) * Math.pow(x, 2 * n + 1) / (2 * n + 1);
+        //         n++;
+        //     } while (Math.abs(term) > precision);
+        //     return result;
+        // }
+
+        function arctg_taylor_rec(x, n) { // n первых членов
+            if (n == 0) {
+                return x;
+            }
+            else {
+                const term = Math.pow(-1, n) * Math.pow(x, 2 * n + 1) / (2 * n + 1); // n-ый член ряда
+                return term + arctg_taylor_rec(x, n - 1);
+            }
+        }
+
+        for (let x = 0.5; x >= 0.1; x -= 0.1) {
+            document.body.innerHTML += `<p>arctg(${x}) через Math.atan(x): ${Math.atan(x)}</p>`;
+            document.body.innerHTML += `<p>arctg(${x}) через ряд Тейлора (рекурсия): ${arctg_taylor_rec(x, 10 - 1)}</p>`; //10 первых членов (9 + нулевой)
+            document.body.innerHTML += `<hr>`;
+        }
+    </script>
+</body>
+</html>

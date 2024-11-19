@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function check_num(num, error_mes, repeat_mes) {
+                while(isNaN(num)) {
+                    window.alert(error_mes);
+                    num = parseFloat(prompt(repeat_mes));
+            }
+            return num;
+        }
+
+        b_func = (x, y, z) => x * (Math.tan(z) + Math.cos(y) ** 2);
+
+        let x = check_num(parseFloat(prompt("Введите x: ")), "Введите корректное значение числа.", "Введите x: ");
+        let y = check_num(parseFloat(prompt("Введите y: ")), "Введите корректное значение числа.", "Введите y: ");
+        let z = check_num(parseFloat(prompt("Введите z: ")), "Введите корректное значение числа.", "Введите z: ");
+        let b = b_func(x, y, z);
+
+        document.body.innerHTML += `<p style="font-size: 19px"><b>Задание 2:</b> Посчитать значение переменной b.</p>`;
+        document.body.innerHTML += "<img src = './img/b_func.png'>";
+        document.body.innerHTML += "<p><b>Результаты:</b></p>";
+        document.body.innerHTML += "<ul><li>x: " + x.toFixed(2) + "</li><li>y: " + y.toFixed(2) + "</li><li>z: " + z.toFixed(2) + "</li><li>b: " + b.toFixed(2) + "</li></ul>";
+        document.body.innerHTML += "<hr>";
+        document.body.innerHTML += "<p>Скрипт разработал: Ваше Имя</p>";
+    </script>
+</body>
+</html>
