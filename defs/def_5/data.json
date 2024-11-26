@@ -1,0 +1,43 @@
+[
+    {
+      "tag": "div",
+      "attributes": {
+        "class": "container",
+        "id": "main-container"
+      },
+      "content": "Это основной контейнер",
+      "children": [
+        {
+          "tag": "h1",
+          "attributes": {
+            "class": "header"
+          },
+          "content": "Заголовок 1 уровня"
+        },
+        {
+          "tag": "p",
+          "attributes": {
+            "class": "description"
+          },
+          "content": "Описание страницы"
+        },
+        {
+          "tag": "ul",
+          "attributes": {
+            "class": "item-list"
+          },
+          "children": [
+            {
+              "tag": "li",
+              "content": "Элемент списка 1"
+            },
+            {
+              "tag": "li",
+              "content": "Элемент списка 2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  

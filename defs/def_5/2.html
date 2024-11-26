@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    select, input, button {
+      margin: 5px 0;
+      padding: 8px;
+      font-size: 14px;
+    }
+    .output-container {
+      margin-top: 20px;
+    }
+    .output-container div {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Создание HTML элементов</h1>
+  <form id="dynamic-form">
+    <label for="tag-select">Выберите тег:</label>
+    <select id="tag-select">
+      <!-- Теги будут добавлены через JS -->
+    </select>
+    <label for="content-input">Введите контент:</label>
+    <input type="text" id="content-input" placeholder="Введите текст">
+    <button type="button" id="create-button">Создать элемент</button>
+  </form>
+  <div class="output-container" id="output-container">
+    <!-- Динамически созданные элементы будут добавляться сюда -->
+  </div>
+
+  <script>
+    // Массив с названиями блочных тегов
+    const blockTags = ["div", "section", "article", "aside", "header", "footer", "main", "nav"];
+
+    // Получение элементов из DOM
+    const tagSelect = document.getElementById("tag-select");
+    const contentInput = document.getElementById("content-input");
+    const createButton = document.getElementById("create-button");
+    const outputContainer = document.getElementById("output-container");
+
+    // Заполнение выпадающего списка
+    blockTags.forEach(tag => {
+      const option = document.createElement("option");
+      option.value = tag;
+      option.textContent = tag;
+      tagSelect.appendChild(option);
+    });
+
+    // Добавление нового элемента на страницу
+    createButton.addEventListener("click", () => {
+      const selectedTag = tagSelect.value;
+      const content = contentInput.value.trim();
+
+      if (content === "") {
+        alert("Введите контент для элемента!");
+        return;
+      }
+
+      // Создание нового элемента
+      const newElement = document.createElement(selectedTag);
+      newElement.textContent = content;
+      newElement.style.border = "1px dashed #007BFF";
+      newElement.style.padding = "10px";
+
+      // Добавление элемента в контейнер
+      outputContainer.appendChild(newElement);
+
+      // Очистка поля ввода
+      contentInput.value = "";
+    });
+  </script>
+</body>
+</html>

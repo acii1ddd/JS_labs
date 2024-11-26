@@ -44,7 +44,7 @@
         
         function getRateInfo() {
             const request = new XMLHttpRequest();
-            request.open("GET", ''); // async by default
+            request.open("GET", 'https://api.nbrb.by/exrates/rates/HKD?parammode=2'); // async by default
             
             request.onreadystatechange = function() { // event на readyState
                 if (request.status === 200) {

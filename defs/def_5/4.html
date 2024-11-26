@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .highlighted {
+            background-color: lightsalmon;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Blocks</h2>
+    <div>
+        <p>First</p>
+        <p>Second</p>
+        <p>Third</p>
+    </div>
+    <div>
+        <p>First</p>
+        <p>Second</p>
+        <p>Third</p>
+    </div>
+    <div>
+        <p>First</p>
+        <p>Second</p>
+        <p>Third</p>
+    </div>
+
+    <h2>Lists</h2>
+    <p>First</p>
+    <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+    <p>Second</p>
+    <ol>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ol>
+    <h2>Pictures</h2>
+    <div>
+        <picture><img src="1.png" alt="1.png"></picture>
+        <picture><img src="2.png" alt="2.png"></picture>
+        <picture><img src="3.png" alt="3.png"></picture>
+    </div>
+    <h2>Dropdown list</h2>
+    <select name="list" id="">
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value=" ">Three</option>
+    </select>
+    <div></div>
+
+    <script>
+        // очистить все выделенн элементы
+        function clearAllHighlights() {
+            const highlighted = document.querySelectorAll('.highlighted');
+            highlighted.forEach(element => {
+                element.classList.remove('highlighted'); // удаляем у всех класс highlighted
+            });
+        }
+
+        // выделить дочер элементы до заданной глубины
+        function highlightChildren(parent, depth) {
+            if (depth === 0 || !parent.children.length) return;
+
+            Array.from(parent.children).forEach(child => {
+                child.classList.add('highlighted'); // выдел curr children
+                highlightChildren(child, depth - 1); // rec выдел оствльных
+            });
+        }
+
+        document.addEventListener('click', (event) => {
+            // убир все предыдущие выделения
+            clearAllHighlights();
+            const clickedElement = event.target;
+            highlightChildren(clickedElement, 2);
+            event.stopPropagation();
+        });
+    </script>
+</body>
+</html>

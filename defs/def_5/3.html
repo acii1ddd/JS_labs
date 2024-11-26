@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>title</title>
+  <style>
+    .container {
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+    .header {
+      color: #007BFF;
+    }
+    .description {
+      font-size: 14px;
+      color: #555;
+    }
+    .item-list {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .item-list li {
+      list-style: disc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Пример генерации DOM из JSON</h1>
+  <div id="root"></div>
+  <script>
+    // Загружаем данные JSON
+    async function loadJSON(url) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Ошибка загрузки JSON: ${response.statusText}`);
+      }
+      return await response.json();
+    }
+
+    // Функция для создания элемента DOM
+    function createElement(data) {
+      const element = document.createElement(data.tag);
+
+      // если ли атрибуты
+      if (data.attributes) {
+        for (const [key, value] of Object.entries(data.attributes)) { // Object.entries(data.attributes) превращает объект attributes в массив пар [ключ, значение]
+          element.setAttribute(key, value);
+        } // прокинуть в атрибут все его свойства <div class="container" id="main" data-info="example"></div>
+      }
+
+      // Добавление контента
+      if (data.content) {
+        element.textContent = data.content;
+      }
+
+      // Рекурсивное добавление детей
+      if (data.children) {
+        data.children.forEach(child => {
+          const childElement = createElement(child);
+          element.appendChild(childElement);
+        });
+      }
+
+      return element; // возвращаем созданный элемент
+    }
+
+    // Основная функция для рендеринга структуры
+    async function renderDOM() {
+      try {
+        const data = await loadJSON('./data.json'); // Путь к JSON-файлу
+        const root = document.getElementById('root');
+
+        data.forEach(item => {
+          const element = createElement(item);
+          root.appendChild(element);
+        });
+      } catch (error) {
+        console.error("Ошибка:", error);
+      }
+    }
+
+    renderDOM();
+  </script>
+</body>
+</html>
